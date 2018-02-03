@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="assets/css/amazeui.css" />
+  <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/amazeui.js" ></script>
+  <title> Calendar Test</title>
+  <style>
+*{margin:0;padding:0;}
+
+body{
+  background:white;
+}
+
+#calendar{
+  width:358px;
+  margin:0 auto;
+  margin-top:2%;
+  margin-bottom:2%;
+  border-radius:5px;
+  font-family:'Open Sans',sans-serif;
+  text-align:center;
+  color:#555;
+  box-shadow:0 0 50px -14px rgba(0,0,0,.8);
+}
+
+#calendar h1{
+  background:#ee3333;
+  border-radius:5px 5px 0 0;
+  padding:20px;
+  font-size:140%;
+  font-weight:300;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:#fff;
+  cursor:default;
+  text-shadow:0 0 10px rgba(0,0,0,.8);
+}
+
+#calendar table{
+  border-top:1px solid #ddd;
+  border-left:1px solid #ddd;
+  border-spacing:0;
+  border-radius:0 0 5px 5px;
+}
+
+#calendar td{
+  width:38px;
+  height:38px;
+  background:#eee;
+  border-right:1px solid #ddd;
+  border-bottom:1px solid #ddd;
+  padding:6px;
+  cursor:pointer;
+  transition:background .3s;
+  -webkit-transition:background .3s;
+}
+
+#calendar td:hover:not(.current){
+  background:#ddd;
+}
+
+#calendar .lastmonth,#calendar .nextmonth,#calendar .nextmonth ~ *{
+  background:#fff;
+  color:#999;
+}
+
+#calendar .current{
+  background:#ee3333;
+  font-weight:700;
+  color:#fff;
+  text-shadow:0 0 10px rgba(0,0,0,.5);
+}
+
+#calendar .hastask{
+  font-weight:700;
+}
+#calendar tr:last-of-type td:first-of-type{border-radius:0 0 0 5px;}
+#calendar tr:last-of-type td:last-of-type{border-radius:0 0 5px 0;}</style>
+
+
+
+</head>
+
+<body>
+
+  <div id="calendar">
+  <h1 style="font-family: '微软雅黑';">January</h1>
+  <table>
+    <tr><td>1</td><td>2</td><td>3</td><td class="hastask">4</td><td>5</td><td>6</td><td>7</td></tr>
+    <td class="current">8</td><td class="hastask">9</td><td>10</td><td>11</td><td class="hastask">12</td><td>13</td></tr>
+    <tr><td>14</td><td class="hastask">15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
+    <tr><td class="hastask">21</td><td>22</td><td>23</td><td>24</td><td>25</td><td class="hastask">26</td><td>27</td></tr>
+    <tr><td>28</td><td>29</td><td class="hastask">30</td><td>31</td><td class="nextmonth">1</td><td>2</td><td>3</td></tr>
+  </table>
+</div>
+
+
+
+
+</body>
+
+</html>
