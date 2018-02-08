@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   <script type="text/javascript" src="js/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/amazeui.css" />
   <title> Calendar Test</title>
   <style>
 *{margin:0;padding:0;}
@@ -97,7 +98,13 @@ body{
   </tr>
   </table>
 </div>
-
+<br />
+<div class="am-input-group" style="text-align :center">
+      <input type="text" class="am-form-field">
+      	<span class="am-input-group-btn">
+        <button class="am-btn am-btn-default" type="button">手气还行</button>
+      </span>
+</div>
 <script>
 var date=new Date();
 var month=date.getMonth()+1;
