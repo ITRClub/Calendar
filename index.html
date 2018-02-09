@@ -27,19 +27,19 @@ body{
 }
 
 #calendar h1{
+  margin-bottom: 0px;
   background:#ee3333;
   border-radius:5px 5px 0 0;
   padding:20px;
-  font-size:140%;
-  font-weight:300;
   text-transform:uppercase;
   letter-spacing:1px;
   color:#fff;
   cursor:default;
-  text-shadow:0 0 10px rgba(0,0,0,.8);
+  text-shadow:0 0 7px rgba(0,0,0,.8);
 }
 
 #calendar table{
+  width: 358px;
   border-top:1px solid #ddd;
   border-left:1px solid #ddd;
   border-spacing:0;
@@ -83,7 +83,8 @@ body{
 </style>
 </head>
 
-<body>
+<body style="padding-top: 10px;">
+
 <div id="calendar">
   <h1 style="font-family: '微软雅黑';"><p id="month"></p></h1>
   <table id="table">
@@ -98,13 +99,18 @@ body{
   </tr>
   </table>
 </div>
-<br />
-<div class="am-input-group" style="text-align :center">
-      <input type="text" class="am-form-field">
-      	<span class="am-input-group-btn">
-        <button class="am-btn am-btn-default" type="button">手气还行</button>
-      </span>
+
+<br>
+
+<center>
+<div class="am-input-group" style="width: 95%;">
+  <input type="text" class="am-form-field">
+    <span class="am-input-group-btn">
+    <button class="am-btn am-btn-default" type="button">确认有任务的日子</button>
+  </span>
 </div>
+</center>
+
 <script>
 var date=new Date();
 var month=date.getMonth()+1;
