@@ -2,113 +2,112 @@
 <html>
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="UTF-8">
-  <script type="text/javascript" src="js/jquery.min.js"></script>
-  <link rel="stylesheet" href="css/amazeui.css" />
-  <title> Calendar Test</title>
-  <style>
-*{margin:0;padding:0;}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<link rel="stylesheet" href="css/amazeui.css">
+	<title>Calendar Test</title>
+	<style>
+	*{margin:0;padding:0;}
 
-body{
-  background:white;
-}
+	body{
+		background:white;
+	}
 
-#calendar{
-  width:358px;
-  margin:0 auto;
-  margin-top:2%;
-  margin-bottom:2%;
-  border-radius:5px;
-  font-family:'Open Sans',sans-serif;
-  text-align:center;
-  color:#555;
-  box-shadow:0 0 50px -14px rgba(0,0,0,.8);
-}
+	#calendar{
+		width:358px;
+		margin:0 auto;
+		margin-top:2%;
+		margin-bottom:2%;
+		border-radius:5px;
+		font-family:'Open Sans',sans-serif;
+		text-align:center;
+		color:#555;
+		box-shadow:0 0 50px -14px rgba(0,0,0,.8);
+	}
 
-#calendar h1{
-  margin-bottom: 0px;
-  background:#ee3333;
-  border-radius:5px 5px 0 0;
-  padding:20px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  color:#fff;
-  cursor:default;
-  text-shadow:0 0 7px rgba(0,0,0,.8);
-}
+	#calendar h1{
+		margin-bottom: 0px;
+		background:#ee3333;
+		border-radius:5px 5px 0 0;
+		padding:20px;
+		text-transform:uppercase;
+		letter-spacing:1px;
+		color:#fff;
+		cursor:default;
+		text-shadow:0 0 7px rgba(0,0,0,.8);
+	}
 
-#calendar table{
-  width: 358px;
-  border-top:1px solid #ddd;
-  border-left:1px solid #ddd;
-  border-spacing:0;
-  border-radius:0 0 5px 5px;
-}
+	#calendar table{
+		width: 358px;
+		border-top:1px solid #ddd;
+		border-left:1px solid #ddd;
+		border-spacing:0;
+		border-radius:0 0 5px 5px;
+	}
 
-#calendar td{
-  width:38px;
-  height:38px;
-  background:#eee;
-  border-right:1px solid #ddd;
-  border-bottom:1px solid #ddd;
-  padding:6px;
-  cursor:pointer;
-  transition:background .3s;
-  -webkit-transition:background .3s;
-}
+	#calendar td{
+		width:38px;
+		height:38px;
+		background:#eee;
+		border-right:1px solid #ddd;
+		border-bottom:1px solid #ddd;
+		padding:6px;
+		cursor:pointer;
+		transition:background .3s;
+		-webkit-transition:background .3s;
+	}
 
-#calendar td:hover:not(.today){
-  background:#ddd;
-}
+	#calendar td:hover:not(.today){
+		background:#ddd;
+	}
 
-#calendar .otherMonth{
-  background:#fff;
-  color:#999;
-}
+	#calendar .otherMonth{
+		background:#fff;
+		color:#999;
+	}
 
-#calendar .today{
-  background:#ee3333;
-  font-weight:700;
-  color:#fff;
-  text-shadow:0 0 10px rgba(0,0,0,.5);
-}
+	#calendar .today{
+		background:#ee3333;
+		font-weight:700;
+		color:#fff;
+		text-shadow:0 0 10px rgba(0,0,0,.5);
+	}
 
-#calendar .hasTask{
-  font-weight:bold;
-  color: green;
-}
-#calendar tr:last-of-type td:first-of-type{border-radius:0 0 0 5px;}
-#calendar tr:last-of-type td:last-of-type{border-radius:0 0 5px 0;}
+	#calendar .hasTask{
+		font-weight:bold;
+		color: green;
+	}
+	#calendar tr:last-of-type td:first-of-type{border-radius:0 0 0 5px;}
+	#calendar tr:last-of-type td:last-of-type{border-radius:0 0 5px 0;}
 </style>
 </head>
 
 <body style="padding-top: 10px;">
-
 <div id="calendar">
-  <h1 style="font-family: '微软雅黑';"><p id="month"></p></h1>
-  <table id="table">
-  <tr>
-    <td>日</td>
-    <td>一</td>
-    <td>二</td>
-    <td>三</td>
-    <td>四</td>
-    <td>五</td>
-    <td>六</td>
-  </tr>
-  </table>
+	<h1 style="font-family: '微软雅黑';"><p id="month"></p></h1>
+	<table id="table">
+		<tr>
+			<td>日</td>
+			<td>一</td>
+			<td>二</td>
+			<td>三</td>
+			<td>四</td>
+			<td>五</td>
+			<td>六</td>
+		</tr>
+	</table>
 </div>
 
 <br>
 
 <center>
-<div class="am-input-group" style="width: 95%;">
-  <input type="text" class="am-form-field">
-    <span class="am-input-group-btn">
-    <button class="am-btn am-btn-default" type="button">确认有任务的日子</button>
-  </span>
-</div>
+	<div class="am-input-group" style="width: 95%;">
+		<input type="text" class="am-form-field">
+		<span class="am-input-group-btn">
+			<button class="am-btn am-btn-default" type="button">确认有任务的日子</button>
+		</span>
+	</div>
 </center>
 
 <script>
@@ -123,98 +122,98 @@ var nextIsOtherMonth=0;// 明天是下个月
 window.onload=function(){initTable();showMonth(month);}
 
 function initTable(){
-  content="";
+	content="";
 
-  for(i=0;i<totalWeek;i++){
-    content+="<tr>";
+	for(i=0;i<totalWeek;i++){
+		content+="<tr>";
 
-    for(j=0;j<=6;j++){
-      loc=i*7+j;
-      dayNum=day[loc];
-      lastDayNum=day[loc-1];
-      nextDayNum=day[loc+1];
+		for(j=0;j<=6;j++){
+			loc=i*7+j;
+			dayNum=day[loc];
+			lastDayNum=day[loc-1];
+			nextDayNum=day[loc+1];
 
-      // 月份单元格样式判断
-      if(showOtherMonth==1 && dayNum>1){
-        // 上个月的几天
-        monthStyle=1;
-      }else if(nextIsOtherMonth==1){
-        // 今天是下个月
-        monthStyle=1;
-      }else if(nextDayNum<dayNum){
-        // 明天是下个月
-        nextIsOtherMonth=1;
-        monthStyle=0;
-      }else{
-        // 这个月内
-        showOtherMonth=0;
-        monthStyle=0;
-      }
+			// 月份单元格样式判断
+			if(showOtherMonth==1 && dayNum>1){
+				// 上个月的几天
+				monthStyle=1;
+			}else if(nextIsOtherMonth==1){
+				// 今天是下个月
+				monthStyle=1;
+			}else if(nextDayNum<dayNum){
+				// 明天是下个月
+				nextIsOtherMonth=1;
+				monthStyle=0;
+			}else{
+				// 这个月内
+				showOtherMonth=0;
+				monthStyle=0;
+			}
 
-      // 月份单元格样式显示
-      if(monthStyle==1){
-        content+='<td class="otherMonth">';        
-      }else if(hasTask.indexOf(dayNum)!=-1){
-        content+='<td class="hasTask">';
-      }else if(date.getDate()==dayNum){
-        content+='<td class="today">';
-      }else{
-        content+="<td>";
-      }
+			// 月份单元格样式显示
+			if(monthStyle==1){
+				content+='<td class="otherMonth">';				
+			}else if(hasTask.indexOf(dayNum)!=-1){
+				content+='<td class="hasTask">';
+			}else if(date.getDate()==dayNum){
+				content+='<td class="today">';
+			}else{
+				content+="<td>";
+			}
 
-      content+=dayNum+"</td>";
-    }
+			content+=dayNum+"</td>";
+		}
 
-   content+="</tr>";
-  }
+		content+="</tr>";
+	}
 
-  $("#table").append(content);
+	$("#table").append(content);
 }
 
 function showMonth(month){
-  ret="";
-  switch(month){
-    case 1:
-      ret="一月";
-      break;
-    case 2:
-      ret="二月";
-      break;
-    case 3:
-      ret="三月";
-      break;
-    case 4:
-      ret="四月";
-      break;
-    case 5:
-      ret="五月";
-      break;
-    case 6:
-      ret="六月";
-      break;
-    case 7:
-      ret="七月";
-      break;
-    case 8:
-      ret="八月";
-      break;
-    case 9:
-      ret="九月";
-      break;
-    case 10:
-      ret="十月";
-      break;
-    case 11:
-      ret="十一月";
-      break;
-    case 12:
-      ret="十二月";
-      break;
-  }
+	ret="";
+	switch(month){
+		case 1:
+		ret="一月";
+		break;
+		case 2:
+		ret="二月";
+		break;
+		case 3:
+		ret="三月";
+		break;
+		case 4:
+		ret="四月";
+		break;
+		case 5:
+		ret="五月";
+		break;
+		case 6:
+		ret="六月";
+		break;
+		case 7:
+		ret="七月";
+		break;
+		case 8:
+		ret="八月";
+		break;
+		case 9:
+		ret="九月";
+		break;
+		case 10:
+		ret="十月";
+		break;
+		case 11:
+		ret="十一月";
+		break;
+		case 12:
+		ret="十二月";
+		break;
+	}
 
-  $("#month").html(ret);
+	$("#month").html(ret);
 }
 </script>
-</body>
 
+</body>
 </html>
