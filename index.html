@@ -4,9 +4,15 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<link rel="stylesheet" href="css/amazeui.css">
 	<title>Calendar Test</title>
+	
+	<!-- include JS File -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/amazeui.min.js"></script>
+
+	<!-- include CSS File -->
+	<link rel="stylesheet" href="css/amazeui.min.css">
+	
 	<style>
 	*{margin:0;padding:0;}
 
@@ -74,7 +80,7 @@
 		text-shadow:0 0 10px rgba(0,0,0,.5);
 	}
 
-	#calendar .hasTask{
+	#calendar .haveTask{
 		font-weight:bold;
 		color: green;
 	}
@@ -84,6 +90,8 @@
 </head>
 
 <body style="padding-top: 10px;">
+
+<!-- 日历框 -->
 <div id="calendar">
 	<h1 style="font-family: '微软雅黑';"><p id="month"></p></h1>
 	<table id="table">
@@ -98,14 +106,15 @@
 		</tr>
 	</table>
 </div>
+<!-- ./日历框 -->
 
 <br>
 
 <center>
 	<div class="am-input-group" style="width: 95%;">
-		<input type="text" class="am-form-field">
+		<input class="am-form-field" id="haveTaskDay_show" style="border-radius:5px;" disabled>
 		<span class="am-input-group-btn">
-			<button class="am-btn am-btn-default" type="button">确认有任务的日子</button>
+			<button class="am-btn am-btn-success" id="sureHaveTaskDay_btn" onclick="sureHaveTaskDay()" style="border-radius:5px;">确认有任务的日子</button>
 		</span>
 	</div>
 </center>
@@ -113,25 +122,78 @@
 <script>
 var date=new Date();
 var month=date.getMonth()+1;
-var day=[29,30,31,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,1,2,3,4];
-var hasTask=[27,9,18];
-var totalWeek=day.length/7;
+var days=[29,30,31,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,1,2,3,4];
+var haveTaskDays=[];
 var showOtherMonth=1;
 var nextIsOtherMonth=0;// 明天是下个月
 
-window.onload=function(){initTable();showMonth(month);}
+window.onload=function(){
+	initTable();
+	showMonth(month);
+	showHaveTaskDay();
+	$("#sureHaveTaskDay_btn").removeAttr("disabled");
+}
+
+
+function chooseHaveTaskDay(loc){
+	style=$("#td_"+loc).attr("class");
+	dayNum=days[loc];
+	
+	if(style=="haveTask"){
+		// 选中的日子之前有任务，当前反选
+		$("#td_"+loc).attr("class","");
+		haveTaskDays.splice($.inArray(dayNum,haveTaskDays),1);
+	}else if(style=="" || style==undefined){
+		// 新选中当前日子有任务
+		$("#td_"+loc).attr("class","haveTask");
+		haveTaskDays.push(dayNum);
+	}
+	
+	showHaveTaskDay();
+}
+
+
+function showHaveTaskDay(){
+	ret="";
+	total=haveTaskDays.length;
+	
+	for(i=0;i<total;i++){
+		ret+=haveTaskDays[i]+",";
+	}
+	
+	// 去除最后一个逗号
+	ret=ret.substr(0,ret.length-1);
+	
+	$("#haveTaskDay_show").val(ret);
+}
+
+
+function sureHaveTaskDay(){
+	for(i=0;i<42;i++){
+		// 清除日历单元格的onClick事件
+		$("#td_"+i).attr("onclick","");
+	}
+
+	// 修改确认按钮样式
+	$("#sureHaveTaskDay_btn").attr("disabled","disabled");
+	$("#sureHaveTaskDay_btn").attr("class","am-btn am-btn-default");
+	alert("您已成功确定有任务的日子。\n系统正在生成照片，请稍后！");
+}
+
 
 function initTable(){
 	content="";
 
-	for(i=0;i<totalWeek;i++){
+	for(i=0;i<5;i++){
 		content+="<tr>";
 
-		for(j=0;j<=6;j++){
+		for(j=0;j<7;j++){
 			loc=i*7+j;
-			dayNum=day[loc];
-			lastDayNum=day[loc-1];
-			nextDayNum=day[loc+1];
+			
+			// 获取日期数字
+			dayNum=days[loc];
+			lastDayNum=days[loc-1];
+			nextDayNum=days[loc+1];
 
 			// 月份单元格样式判断
 			if(showOtherMonth==1 && dayNum>1){
@@ -152,13 +214,13 @@ function initTable(){
 
 			// 月份单元格样式显示
 			if(monthStyle==1){
-				content+='<td class="otherMonth">';				
-			}else if(hasTask.indexOf(dayNum)!=-1){
-				content+='<td class="hasTask">';
+				content+='<td id="td_'+loc+'" class="otherMonth">';
+			}else if(haveTaskDays.indexOf(dayNum)!=-1){
+				content+='<td id="td_'+loc+'" class="haveTask" onclick="chooseHaveTaskDay('+loc+')">';
 			}else if(date.getDate()==dayNum){
-				content+='<td class="today">';
+				content+='<td id="td_'+loc+'" class="today" onclick="chooseHaveTaskDay('+loc+')">';
 			}else{
-				content+="<td>";
+				content+='<td id="td_'+loc+'" onclick="chooseHaveTaskDay('+loc+')">';
 			}
 
 			content+=dayNum+"</td>";
@@ -169,6 +231,7 @@ function initTable(){
 
 	$("#table").append(content);
 }
+
 
 function showMonth(month){
 	ret="";
