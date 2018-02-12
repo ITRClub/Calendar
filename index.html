@@ -9,6 +9,7 @@
 	<!-- include JS File -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/amazeui.min.js"></script>
+	<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
 
 	<!-- include CSS File -->
 	<link rel="stylesheet" href="css/amazeui.min.css">
@@ -178,6 +179,23 @@ function sureHaveTaskDay(){
 	$("#sureHaveTaskDay_btn").attr("disabled","disabled");
 	$("#sureHaveTaskDay_btn").attr("class","am-btn am-btn-default");
 	alert("您已成功确定有任务的日子。\n系统正在生成照片，请稍后！");
+
+	// 生成日历照片
+	event.preventDefault();
+	html2canvas(document.getElementById("calendar"), {
+		allowTaint: true,
+		taintTest: false,
+		onrendered:function(canvas){
+			canvas.id = "mycanvas";
+			//生成base64图片数据
+			var dataUrl = canvas.toDataURL();
+			var newImg = document.createElement("img");
+			newImg.src =  dataUrl;
+			document.body.appendChild(newImg);
+		}
+	});
+
+	alert("生成成功！！！\n请长按下图以保存照片！");
 }
 
 
