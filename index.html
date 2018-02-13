@@ -111,9 +111,16 @@
 
 <br>
 
+<center><h1 style="color:green">
+	<font color="blue">小生蚝</font>在这些天有空哦~<br>
+	快来找我玩吧！
+</h1></center>
+
+<br>
+
 <center>
 	<div class="am-input-group" style="width: 95%;">
-		<input class="am-form-field" id="haveTaskDay_show" style="border-radius:5px;" disabled>
+		<input class="am-form-field" id="name" style="border-radius:5px;">
 		<span class="am-input-group-btn">
 			<button class="am-btn am-btn-success" id="sureHaveTaskDay_btn" onclick="sureHaveTaskDay()" style="border-radius:5px;">确认有任务的日子</button>
 		</span>
@@ -131,7 +138,6 @@ var nextIsOtherMonth=0;// 明天是下个月
 window.onload=function(){
 	initTable();
 	showMonth(month);
-	showHaveTaskDay();
 	$("#sureHaveTaskDay_btn").removeAttr("disabled");
 }
 
@@ -149,33 +155,25 @@ function chooseHaveTaskDay(loc){
 		$("#td_"+loc).attr("class","haveTask");
 		haveTaskDays.push(dayNum);
 	}
-	
-	showHaveTaskDay();
-}
-
-
-function showHaveTaskDay(){
-	ret="";
-	total=haveTaskDays.length;
-	
-	for(i=0;i<total;i++){
-		ret+=haveTaskDays[i]+",";
-	}
-	
-	// 去除最后一个逗号
-	ret=ret.substr(0,ret.length-1);
-	
-	$("#haveTaskDay_show").val(ret);
 }
 
 
 function sureHaveTaskDay(){
+	name=$("#name").val();
+
+	if(name==""){
+		alert("请输入姓名/昵称！");
+		$("#name").focus();
+		return false;
+	}
+
 	for(i=0;i<42;i++){
 		// 清除日历单元格的onClick事件
 		$("#td_"+i).attr("onclick","");
 	}
 
 	// 修改确认按钮样式
+	$("#name").attr("disabled","disabled");
 	$("#sureHaveTaskDay_btn").attr("disabled","disabled");
 	$("#sureHaveTaskDay_btn").attr("class","am-btn am-btn-default");
 	alert("您已成功确定有任务的日子。\n系统正在生成照片，请稍后！");
