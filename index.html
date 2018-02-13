@@ -7,12 +7,12 @@
 	<title>Calendar Test</title>
 	
 	<!-- include JS File -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/amazeui.min.js"></script>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
 	<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
 
 	<!-- include CSS File -->
-	<link rel="stylesheet" href="css/amazeui.min.css">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/amazeui/2.7.2/css/amazeui.min.css">
 	
 	<style>
 	*{margin:0;padding:0;}
@@ -31,6 +31,7 @@
 		text-align:center;
 		color:#555;
 		box-shadow:0 0 50px -14px rgba(0,0,0,.8);
+		background-color: white;
 	}
 
 	#calendar h1{
@@ -106,15 +107,23 @@
 			<td>六</td>
 		</tr>
 	</table>
+
+	<!-- 邀请词 -->
+	<div id="invite" style="display: none;text-align: center;">
+		<br>
+		<font style="font-size:27px;font-weight:bold;color:#99CCCC;background-color: white;">
+			<font id="name_show" color="#003366"></font>在这些天有空哦~<br>
+			快来找我玩吧！
+		</h1>
+	</div>
+	<!-- ./邀请词 -->
+
+	<!-- 项目二维码 -->
+	<img id="qrcode" style="display: none;" src="data:image/png;base64,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">
+	<!-- ./项目二维码 -->
+
 </div>
 <!-- ./日历框 -->
-
-<br>
-
-<center><h1 style="color:green">
-	<font color="blue">小生蚝</font>在这些天有空哦~<br>
-	快来找我玩吧！
-</h1></center>
 
 <br>
 
@@ -122,7 +131,7 @@
 	<div class="am-input-group" style="width: 95%;">
 		<input class="am-form-field" id="name" style="border-radius:5px;">
 		<span class="am-input-group-btn">
-			<button class="am-btn am-btn-success" id="sureHaveTaskDay_btn" onclick="sureHaveTaskDay()" style="border-radius:5px;">确认有任务的日子</button>
+			<button class="am-btn am-btn-success" id="sureHaveTaskDay_btn" onclick="sureHaveTaskDay()" style="border-radius:5px;">立即生成照片</button>
 		</span>
 	</div>
 </center>
@@ -167,15 +176,22 @@ function sureHaveTaskDay(){
 		return false;
 	}
 
+	$("#name_show").html(name);
+
 	for(i=0;i<42;i++){
 		// 清除日历单元格的onClick事件
 		$("#td_"+i).attr("onclick","");
 	}
 
+	// 显示邀请词和二维码
+	$("#invite").attr("style","text-align: center;");
+	$("#qrcode").attr("style","");
+
 	// 修改确认按钮样式
 	$("#name").attr("disabled","disabled");
 	$("#sureHaveTaskDay_btn").attr("disabled","disabled");
 	$("#sureHaveTaskDay_btn").attr("class","am-btn am-btn-default");
+
 	alert("您已成功确定有任务的日子。\n系统正在生成照片，请稍后！");
 
 	// 生成日历照片
@@ -192,6 +208,10 @@ function sureHaveTaskDay(){
 			document.body.appendChild(newImg);
 		}
 	});
+
+	// 隐藏邀请词和二维码
+	$("#invite").attr("style","display:none;text-align: center;");
+	$("#qrcode").attr("style","display:none;");
 
 	alert("生成成功！！！\n请长按下图以保存照片！");
 }
