@@ -3,8 +3,10 @@
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="ITRClub">
+	<meta name="keywords" content="ITRClub,聚会小日历">
 	<meta charset="UTF-8">
-	<title>Calendar Test</title>
+	<title>聚会专用小日历 / Powered By ITRClub</title>
 	
 	<!-- include JS File -->
 	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
@@ -13,9 +15,9 @@
 
 	<!-- include CSS File -->
 	<link rel="stylesheet" href="https://cdn.bootcss.com/amazeui/2.7.2/css/amazeui.min.css">
-	
+
 	<style>
-	*{margin:0;padding:0;}
+ 	*{margin:0;padding:0;}
 
 	body{
 		background:white;
@@ -83,19 +85,24 @@
 	}
 
 	#calendar .haveTask{
+		font-size:14px;
 		font-weight:bold;
-		color: green;
+		color: #9C27B0;
 	}
+
 	#calendar tr:last-of-type td:first-of-type{border-radius:0 0 0 5px;}
 	#calendar tr:last-of-type td:last-of-type{border-radius:0 0 5px 0;}
+} 
 </style>
 </head>
 
-<body style="padding-top: 10px;">
+<body>
 
 <!-- 日历框 -->
 <div id="calendar">
-	<h1 style="font-family: '微软雅黑';"><p id="month"></p></h1>
+	<h1 style="font-family: '微软雅黑';">
+		<p id="month"></p>
+	</h1>
 	<table id="table">
 		<tr>
 			<td>日</td>
@@ -107,32 +114,41 @@
 			<td>六</td>
 		</tr>
 	</table>
-
+	<p style="text-align:right;font-weight:bold;font-size:17px;color:#9C27B0;">(紫色代表没空哦~)</p>
 	<!-- 邀请词 -->
 	<div id="invite" style="display: none;text-align: center;">
-		<br>
 		<font style="font-size:27px;font-weight:bold;color:#99CCCC;background-color: white;">
 			<font id="name_show" color="#003366"></font>在这些天有空哦~<br>
 			快来找我玩吧！
-		</h1>
+		</font>
 	</div>
 	<!-- ./邀请词 -->
 
 	<!-- 项目二维码 -->
-	<img id="qrcode" style="display: none;" src="data:image/png;base64,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">
+	<div id="qrcode" class="am-g" style="display: none;">
+		<div class="am-u-sm-6">
+			<img style="width:179px;" src="data:image/png;base64,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">
+		</div>
+		<div class="am-u-sm-6" style="padding-top: 45px;font-weight: bold;">
+			一款聚会专用的日历<br><br>
+			<-- 长按制作你的日历
+		</div>
+	</div>
 	<!-- ./项目二维码 -->
 
 </div>
 <!-- ./日历框 -->
 
-<br>
-
 <center>
 	<div class="am-input-group" style="width: 95%;">
 		<input class="am-form-field" id="name" style="border-radius:5px;">
-		<span class="am-input-group-btn">
-			<button class="am-btn am-btn-success" id="sureHaveTaskDay_btn" onclick="sureHaveTaskDay()" style="border-radius:5px;">立即生成照片</button>
+		<span id="sure1" class="am-input-group-btn">
+			<button class="am-btn am-btn-primary" id="sureInfo_btn" onclick='sureInfo()' style="border-radius:5px;">确认信息</button>
 		</span>
+		<span id="sure2" class="am-input-group-btn" style="display:none;">
+			<button class="am-btn am-btn-success" id="sureHaveTaskDay_btn" onclick='sureHaveTaskDay();' style="border-radius:5px;">立即生成照片</button>
+		</span>
+		
 	</div>
 </center>
 
@@ -148,6 +164,7 @@ window.onload=function(){
 	initTable();
 	showMonth(month);
 	$("#sureHaveTaskDay_btn").removeAttr("disabled");
+	$("#name").removeAttr("disabled");
 }
 
 
@@ -167,12 +184,30 @@ function chooseHaveTaskDay(loc){
 }
 
 
+function sureInfo(){
+	$("#name").blur();
+	name=$("#name").val();
+
+	if(name==""){
+		alert("请输入姓名/昵称！");
+		$("#name").focus();
+		return false;
+	}
+
+	$("#name").attr("disabled","disabled");
+	$("#sure1").attr("style","display:none");
+	$("#sure2").attr("style","")
+}
+
+
 function sureHaveTaskDay(){
 	name=$("#name").val();
 
 	if(name==""){
 		alert("请输入姓名/昵称！");
 		$("#name").focus();
+		$("#sure1").attr("style","");
+		$("#sure2").attr("style","display:none")		
 		return false;
 	}
 
@@ -188,14 +223,12 @@ function sureHaveTaskDay(){
 	$("#qrcode").attr("style","");
 
 	// 修改确认按钮样式
-	$("#name").attr("disabled","disabled");
 	$("#sureHaveTaskDay_btn").attr("disabled","disabled");
 	$("#sureHaveTaskDay_btn").attr("class","am-btn am-btn-default");
 
 	alert("您已成功确定有任务的日子。\n系统正在生成照片，请稍后！");
 
 	// 生成日历照片
-	event.preventDefault();
 	html2canvas(document.getElementById("calendar"), {
 		allowTaint: true,
 		taintTest: false,
@@ -206,14 +239,13 @@ function sureHaveTaskDay(){
 			var newImg = document.createElement("img");
 			newImg.src =  dataUrl;
 			document.body.appendChild(newImg);
+			alert("生成成功！！！\n请长按下图以保存照片！");
 		}
 	});
 
 	// 隐藏邀请词和二维码
 	$("#invite").attr("style","display:none;text-align: center;");
 	$("#qrcode").attr("style","display:none;");
-
-	alert("生成成功！！！\n请长按下图以保存照片！");
 }
 
 
