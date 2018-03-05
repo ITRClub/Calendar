@@ -6,7 +6,7 @@
 	<meta name="author" content="ITRClub">
 	<meta name="keywords" content="ITRClub,聚会小日历">
 	<meta charset="UTF-8">
-	<title>聚会专用小日历 / Powered By ITRClub</title>
+	<title>聚会专用小日历 / ITRClub</title>
 	
 	<!-- include JS File -->
 	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
@@ -59,7 +59,8 @@
 	#calendar td{
 		width:38px;
 		height:38px;
-		background:#eee;
+		background:#fff;
+		color:999;
 		border-right:1px solid #ddd;
 		border-bottom:1px solid #ddd;
 		padding:6px;
@@ -69,12 +70,12 @@
 	}
 
 	#calendar td:hover:not(.today){
-		background:#ddd;
+		background:#fff;
+		color:#999
 	}
 
 	#calendar .otherMonth{
-		background:#fff;
-		color:#999;
+		background:#ddd;
 	}
 
 	#calendar .today{
@@ -85,9 +86,11 @@
 	}
 
 	#calendar .haveTask{
-		font-size:14px;
-		font-weight:bold;
-		color: #9C27B0;
+		background:#ddd;
+	}
+
+	address, blockquote, dl, fieldset, figure, hr, ol, p, pre, ul {
+    	margin: 0 0 0 0!important
 	}
 
 	#calendar tr:last-of-type td:first-of-type{border-radius:0 0 0 5px;}
@@ -97,7 +100,7 @@
 </head>
 
 <body>
-
+<center><h2>请在下方点选你没空的日子</h2></center>
 <!-- 日历框 -->
 <div id="calendar">
 	<h1 style="font-family: '微软雅黑';">
@@ -114,12 +117,10 @@
 			<td>六</td>
 		</tr>
 	</table>
-	<p style="text-align:right;font-weight:bold;font-size:17px;color:#9C27B0;">(紫色代表没空哦~)</p>
 	<!-- 邀请词 -->
 	<div id="invite" style="display: none;text-align: center;">
 		<font style="font-size:27px;font-weight:bold;color:#99CCCC;background-color: white;">
-			<font id="name_show" color="#003366"></font>在这些天有空哦~<br>
-			快来找我玩吧！
+			在这些空白的日子，<br>找<font id="name_show" color="#003366"></font>玩吧！
 		</font>
 	</div>
 	<!-- ./邀请词 -->
@@ -130,8 +131,7 @@
 			<img style="width:179px;" src="data:image/png;base64,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">
 		</div>
 		<div class="am-u-sm-6" style="padding-top: 45px;font-weight: bold;">
-			一款聚会专用的日历<br><br>
-			<-- 长按制作你的日历
+			<<br>长按制作你的日历
 		</div>
 	</div>
 	<!-- ./项目二维码 -->
@@ -141,13 +141,13 @@
 
 <center>
 	<div class="am-input-group" style="width: 95%;">
-		<input class="am-form-field" id="name" style="border-radius:5px;">
-		<span id="sure1" class="am-input-group-btn">
+		<input class="am-form-field" id="name" style="border-radius:5px;" placeholder="输入你的姓名或昵称">
+		<div id="sure1" class="am-input-group-btn">
 			<button class="am-btn am-btn-primary" id="sureInfo_btn" onclick='sureInfo()' style="border-radius:5px;">确认信息</button>
-		</span>
-		<span id="sure2" class="am-input-group-btn" style="display:none;">
-			<button class="am-btn am-btn-success" id="sureHaveTaskDay_btn" onclick='sureHaveTaskDay();' style="border-radius:5px;">立即生成照片</button>
-		</span>
+		</div>
+		<div id="sure2" class="am-input-group-btn" style="display:none;">
+			<button class="am-btn am-btn-success" id="sureHaveTaskDay_btn" onclick='sureHaveTaskDay();' style="border-radius:5px;">生成日历</button>
+		</div>
 		
 	</div>
 </center>
@@ -226,7 +226,7 @@ function sureHaveTaskDay(){
 	$("#sureHaveTaskDay_btn").attr("disabled","disabled");
 	$("#sureHaveTaskDay_btn").attr("class","am-btn am-btn-default");
 
-	alert("您已成功确定有任务的日子。\n系统正在生成照片，请稍后！");
+	alert("您已成功选定没空的日子。\n正在生成图片，请稍候……");
 
 	// 生成日历照片
 	html2canvas(document.getElementById("calendar"), {
@@ -239,7 +239,7 @@ function sureHaveTaskDay(){
 			var newImg = document.createElement("img");
 			newImg.src =  dataUrl;
 			document.body.appendChild(newImg);
-			alert("生成成功！！！\n请长按下图以保存照片！");
+			alert("生成成功\n请长按下图以保存");
 		}
 	});
 
